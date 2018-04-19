@@ -11,18 +11,18 @@ import (
 )
 
 func main() {
-	if len(os.Args) < 3 {
-		log.Print("arguments: <campaignID> <numRequests> \n EG: Flaconi12 10")
+	if len(os.Args) < 4 {
+		log.Print("arguments: <dbAddress> <campaignID> <numRequests> \n EG: Flaconi12 10")
 		os.Exit(1)
 	}
 
-	campaignID := os.Args[1]
-	numRequests, err := strconv.Atoi(os.Args[2])
+	dbAddr := os.Args[1]
+	campaignID := os.Args[2]
+	numRequests, err := strconv.Atoi(os.Args[3])
 	if err != nil {
 		log.Fatal("wrong numRequests: %v", numRequests)
 	}
 
-	dbAddr := "mongodb://localhost"
 	s, err := mgo.Dial(dbAddr)
 	if err != nil {
 		log.Fatalf("connection to '%s' error: %s", dbAddr, err)
